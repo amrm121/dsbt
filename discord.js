@@ -1,6 +1,7 @@
-const Discord = require('discord.js')
-const client = new Discord.Client()
-const axios = require('axios')
+const Discord = require('discord.js');
+const client = new Discord.Client();
+var axios = require('axios');
+var mercadopago = require('mercadopago');
 var colors = require('colors');
 
 axios.create({
@@ -13,6 +14,30 @@ Var(var) => {
     axios.get('path')
 }
 */
+exports.run = function (req, res) {
+  var payment = {
+    description: 'Buying a PS4',
+    transaction_amount: 10500,
+    payment_method_id: 'rapipago',
+    payer: {
+      email: 'test_user_3931694@testuser.com',
+      identification: {
+        type: 'DNI',
+        number: '34123123'
+      }
+    }
+  };
+  
+  mercadopago.payment.create(payment).then(function (data) {
+    res.render('jsonOutput', {
+      result: data
+    });
+  }).catch(function (error) {
+    res.render('500', {
+      error: error
+    });
+  });
+};
 
 function discord(){
     client.on('message', (receivedMessage) => {
