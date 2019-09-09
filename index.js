@@ -1,4 +1,4 @@
-var discord = require('./discord'),
+var discord = require('./discord.js'),
 	axios = require('axios');
 
 //axios();

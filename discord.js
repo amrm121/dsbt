@@ -16,7 +16,17 @@ Var(var) => {
     axios.get('path')
 }
 */
-exports.run = function (req, res) {
+
+
+function discord(){
+    client.on('message', (receivedMessage) => {
+        if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
+            return
+        }
+
+        if (receivedMessage.content.startsWith("!")) {
+            processCommand(receivedMessage)
+            exports.run = function (req, res) {
   var payment = {
     description: 'Buying a PS4',
     transaction_amount: 10500,
@@ -39,15 +49,6 @@ exports.run = function (req, res) {
     mercadopago.configurations.setAccessToken(oldAccessToken);
   });
 };
-
-function discord(){
-    client.on('message', (receivedMessage) => {
-        if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
-            return
-        }
-
-        if (receivedMessage.content.startsWith("!")) {
-            processCommand(receivedMessage)
         }
     })
 } 
