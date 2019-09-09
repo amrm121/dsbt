@@ -1,8 +1,5 @@
-var discord = require('./discord'),
-	mp = require('./mp');
+var discord = require('discord'),
+	axios = require('axios');
 
-const axios = require('./axios.js');
-
-mp();
-axios();
+//axios();
 discord();
