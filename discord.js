@@ -60,7 +60,7 @@ async function pagar(arguments, receivedMessage) {
             //EMAIL CARTAO CPF
             //console.log((args[0]).red);
             const response = await axios.post('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
-            console.log(response);
+            console.log(response).green;
             receivedMessage.channel.send("args: " + st);
         } else {
             receivedMessage.channel.send("as: " + receivedMessage + " - - ")
