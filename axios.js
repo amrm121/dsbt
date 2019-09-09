@@ -19,6 +19,7 @@ async function getUser() {
   }
 }
 
+/*
 async function makePostRequest() {
 
     let res = await axios.post('https://jsonplaceholder.typicode.com/posts');
@@ -51,7 +52,7 @@ axios.interceptors.response.use(function (response) {
   }, function (error) {
     // Do something with response error
     return Promise.reject(error);
-  });
+  });*/
 
 
 module.exports = axios;

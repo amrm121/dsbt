@@ -49,50 +49,26 @@ function processCommand(receivedMessage) {
 
 
 async function pagar(arguments, receivedMessage) {
-    if (arguments.length > 0) {
-        var args = Array.from(arguments);
-        var st = "";
-        let ind = 0;
-        for(ind in args){
-            st += "/" + args[ind++];
+    try{
+            if (arguments.length > 0) {
+                var args = Array.from(arguments);
+                var st = "";
+                let ind = 0;
+            for(ind in args){
+                st += "/" + args[ind++];
+            }
+            //EMAIL CARTAO CPF
+            //console.log((args[0]).red);
+            const response = await axios.post('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
+            console.log(response);
+            receivedMessage.channel.send("args: " + st);
+        } else {
+            receivedMessage.channel.send("as: " + receivedMessage + " - - ")
         }
-        //EMAIL CARTAO CPF
-        //console.log((args[0]).red);
-        const response = await axios.get('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
-        console.log(response);
-        receivedMessage.channel.send({embed: {
-    color: 3447003,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    title: "This is an embed",
-    url: "http://google.com",
-    description: "This is a test embed to showcase what they look like and what they can do.",
-    fields: [{
-        name: "Fields",
-        value: "They can have different fields with small headlines."
-      },
-      {
-        name: "Masked links",
-        value: "You can put [masked links](http://google.com) inside of rich embeds."
-      },
-      {
-        name: "Markdown",
-        value: "You can put all the *usual* **__Markdown__** inside of them."
-      }
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "© Example"
+    }catch(error){
+        console.error(error)
     }
-  }
-});
-        receivedMessage.channel.send("args: " + st);
-    } else {
-        receivedMessage.channel.send("as: " + receivedMessage + " - - ")
-    }
+
 }
 
 function teste(arguments, receivedMessage) {

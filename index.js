@@ -3,7 +3,6 @@ var discord = require('./discord'),
 
 const axios = require('./axios.js');
 
-
+mp();
 axios();
 discord();
-mp();
