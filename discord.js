@@ -3,6 +3,8 @@ const client = new Discord.Client();
 var axios = require('axios');
 var mercadopago = require('mercadopago');
 var colors = require('colors');
+var config = require('./config');
+var oldAccessToken = mercadopago.configurations.getAccessToken();
 
 axios.create({
   baseURL: 'https://api.mercadopago.com'
@@ -27,15 +29,14 @@ exports.run = function (req, res) {
       }
     }
   };
-  
+
+  mercadopago.configurations.setAccessToken(config.access_token);
+
   mercadopago.payment.create(payment).then(function (data) {
-    res.render('jsonOutput', {
-      result: data
-    });
+    console.log(data).yellow;
   }).catch(function (error) {
-    res.render('500', {
-      error: error
-    });
+  }).finally(function() {
+    mercadopago.configurations.setAccessToken(oldAccessToken);
   });
 };
 
@@ -84,8 +85,8 @@ async function pagar(arguments, receivedMessage) {
             }
             //EMAIL CARTAO CPF
             //console.log((args[0]).red);
-            const response = await axios.post('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
-            console.log(response).green;
+            //const response = await axios.post('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
+            //console.log(response).green;
             receivedMessage.channel.send("args: " + st);
         } else {
             receivedMessage.channel.send("as: " + receivedMessage + " - - ")
