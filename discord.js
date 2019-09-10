@@ -44,7 +44,9 @@ function discord(){
 
   mercadopago.payment.create(payment).then(function (data) {
     console.log(data).yellow;
+
   }).catch(function (error) {
+    console.error(error).green;
   }).finally(function() {
     mercadopago.configurations.setAccessToken(oldAccessToken);
   });
