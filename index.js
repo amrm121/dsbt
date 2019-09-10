@@ -3,3 +3,4 @@ var discord = require('./discord.js'),
 
 //axios();
 discord();
+run();
