@@ -16,18 +16,7 @@ Var(var) => {
     axios.get('path')
 }
 */
-
-
-function discord(){
-    client.on('message', (receivedMessage) => {
-        if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
-            return
-        }
-
-        if (receivedMessage.content.startsWith("!")) {
-            processCommand(receivedMessage)
-            exports.run = function (req, res) {
-  var payment = {
+var payment = {
     description: 'Buying a PS4',
     transaction_amount: 10500,
     payment_method_id: 'rapipago',
@@ -38,8 +27,9 @@ function discord(){
         number: '34123123'
       }
     }
-  };
+};
 
+exports.run = function (req, res) {
   mercadopago.configurations.setAccessToken(config.access_token);
 
   mercadopago.payment.create(payment).then(function (data) {
@@ -51,6 +41,16 @@ function discord(){
     mercadopago.configurations.setAccessToken(oldAccessToken);
   });
 };
+
+function discord(){
+    client.on('message', (receivedMessage) => {
+        if (receivedMessage.author == client.user) { // Prevent bot from responding to its own messages
+            return
+        }
+
+        if (receivedMessage.content.startsWith("!")) {
+            processCommand(receivedMessage)
+            
         }
     })
 } 
