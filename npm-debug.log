@@ -1,0 +1,56 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'discord.js' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData discord.js
+8 silly fetchOtherPackageData discord.js
+9 silly cache add args [ 'discord.js', null ]
+10 verbose cache add spec discord.js
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'discord.js',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'discord.js',
+11 silly cache add   spec: '/home/am/Desktop/dsbot/discord.js',
+11 silly cache add   type: 'local' }
+12 silly addLocalTarball shasum (computed) 74e293a2b1c4157c77e908c6d6c71b948827cac3
+13 verbose addTmpTarball /home/am/Desktop/dsbot/discord.js not in flight; adding
+14 verbose makeDirectory /root/.npm creation not in flight; initializing
+15 silly makeDirectory /root/.npm uid: 1000 gid: 1000
+16 verbose addTmpTarball validating metadata from /home/am/Desktop/dsbot/discord.js
+17 verbose tar unpack /home/am/Desktop/dsbot/discord.js
+18 verbose tar unpacking to /tmp/npm-11941-ab5662cf/unpack-3a5342e0
+19 silly gentlyRm /tmp/npm-11941-ab5662cf/unpack-3a5342e0 is being purged
+20 verbose gentlyRm don't care about contents; nuking /tmp/npm-11941-ab5662cf/unpack-3a5342e0
+21 silly gunzTarPerm modes [ '755', '644' ]
+22 error not a package /home/am/Desktop/dsbot/discord.js
+23 error addLocal Could not install /home/am/Desktop/dsbot/discord.js
+24 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json'
+24 silly fetchPackageMetaData  error for discord.js { Error: ENOENT: no such file or directory, open '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json'
+24 silly fetchPackageMetaData   errno: -2,
+24 silly fetchPackageMetaData   code: 'ENOENT',
+24 silly fetchPackageMetaData   syscall: 'open',
+24 silly fetchPackageMetaData   path: '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json' }
+25 silly rollbackFailedOptional Starting
+26 silly rollbackFailedOptional Finishing
+27 silly runTopLevelLifecycles Starting
+28 silly runTopLevelLifecycles Finishing
+29 silly install printInstalled
+30 verbose stack Error: ENOENT: no such file or directory, open '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json'
+31 verbose cwd /home/am/Desktop/dsbot
+32 error Linux 4.15.0-62-generic
+33 error argv "/usr/bin/node" "/usr/bin/npm" "install" "discord.js"
+34 error node v8.10.0
+35 error npm  v3.5.2
+36 error path /tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json
+37 error code ENOENT
+38 error errno -2
+39 error syscall open
+40 error enoent ENOENT: no such file or directory, open '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json'
+41 error enoent ENOENT: no such file or directory, open '/tmp/npm-11941-ab5662cf/unpack-3a5342e0/package.json'
+41 error enoent This is most likely not a problem with npm itself
+41 error enoent and is related to npm not being able to find a file.
+42 verbose exit [ -2, true ]
