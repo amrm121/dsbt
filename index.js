@@ -14,6 +14,7 @@ client.config = config;
 Carregar DB
 */
 
+var app = Express();
 
 //Carregando Eventos
 fs.readdir("./events/", (err, files) => {
@@ -47,6 +48,10 @@ client.on('error', error => {
     console.log(error);
 });
 
+
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log('servidor boot rodando...')
+});
 
 
 client.login('NjE4Njk3NDg5ODAxMDE5Mzky.XW-ODA.WndIGzWaMP7EpJYqKZF3BmodZ-Q');
