@@ -26,17 +26,21 @@ fs.readdir("./events/", (err, files) => {
 });
 
 
+
 client.commands = new Enmap();
 //Carregando os comandos
-fs.readdir("./events/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-        if (!file.endsWith(".js")) return;
-        let props = require(`./events/${file}`);
-        let commandName = file.split(".")[0];
-        console.log(`> Carregando comando:  [${commandName}]`);
-        client.commands.set(commandName, props);
-    });
+fs.readdir("./comandos/", (err, files) => {
+    if(err) console.log(err);
+
+    let arquivosjs = files.filter(f => f.split(".").pop() == "js");
+    arquivosjs.forEach((f,i) => {
+        let props = require(`./comandos/${f}`);
+        console.log(`comandos ${f} carregadores com sucesso.`)
+        //push num BD?
+        client.commands.set(props.help.name.props);
+
+    })
+
 });
 
 client.on('error', error => {
