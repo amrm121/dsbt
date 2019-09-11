@@ -1,46 +1,67 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const fs = require('fs');
 var axios = require('axios');
 var mercadopago = require('mercadopago');
 var colors = require('colors');
 var config = require('./config');
 var oldAccessToken = mercadopago.configurations.getAccessToken();
+bot.commands = new Discord.Collection();
+
+// carregando os comando a ser utilizados
+
+fs.readdir("./comandos", (err, files) => {
+    if(err) console.log(err);
+
+    let arquivosjs = files.filter(f => f.slit(".").pop() == "js");
+    arquivosjs.forEach((f,i) => {
+        let props = require(`./comandos/${f}`);
+        console.log(`comandos ${f} carregadores com sucesso.`)
+        bot.commands.set(props.help.name.props);
+
+    })
+
+});
+
+
 
 axios.create({
   baseURL: 'https://api.mercadopago.com'
 });
 
+
+// comand  de base  !!
 /*
 var = urlBase
 Var(var) => {
     axios.get('path')
 }
 */
-var payment = {
-    description: 'Buying a PS4',
-    transaction_amount: 10500,
-    payment_method_id: 'rapipago',
-    payer: {
-      email: 'test_user_3931694@testuser.com',
-      identification: {
-        type: 'DNI',
-        number: '34123123'
-      }
-    }
-};
+// var payment = {
+//     description: 'Buying a PS4',
+//     transaction_amount: 10500,
+//     payment_method_id: 'rapipago',
+//     payer: {
+//       email: 'test_user_3931694@testuser.com',
+//       identification: {
+//         type: 'DNI',
+//         number: '34123123'
+//       }
+//     }
+// };
 
-exports.run = function (req, res) {
-  mercadopago.configurations.setAccessToken(config.access_token);
+// exports.run = function (req, res) {
+//   mercadopago.configurations.setAccessToken(config.access_token);
 
-  mercadopago.payment.create(payment).then(function (data) {
-    console.log(data).yellow;
+//   mercadopago.payment.create(payment).then(function (data) {
+//     console.log(data).yellow;
 
-  }).catch(function (error) {
-    console.error(error).green;
-  }).finally(function() {
-    mercadopago.configurations.setAccessToken(oldAccessToken);
-  });
-};
+//   }).catch(function (error) {
+//     console.error(error).green;
+//   }).finally(function() {
+//     mercadopago.configurations.setAccessToken(oldAccessToken);
+//   });
+// };
 
 function discord(){
     client.on('message', (receivedMessage) => {
@@ -84,15 +105,17 @@ async function pagar(arguments, receivedMessage) {
                 var st = "";
                 let ind = 0;
             for(ind in args){
-                st += "/" + args[ind++];
+                st += "|" + args[ind++];
             }
             //EMAIL CARTAO CPF
             //console.log((args[0]).red);
             //const response = await axios.post('/v1/payments?access_token=TEST-1313730632078117-090411-229081d81388a1f5f2e601c7d75f9aa7-465684785');
             //console.log(response).green;
-            receivedMessage.channel.send("args: " + st);
+            email = ''
+            senha = ''
+            receivedMessage.channel.send(email + st + senha);
         } else {
-            receivedMessage.channel.send("as: " + receivedMessage + " - - ")
+            receivedMessage.channel.send("as: " + receivedMessage + " email|senha ")
         }
     }catch(error){
         console.error(error)
