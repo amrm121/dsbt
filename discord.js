@@ -43,9 +43,7 @@ fs.readdir("./comandos/", (err, files) => {
 
 
 
-axios.create({
-  baseURL: 'https://api.mercadopago.com'
-});
+
 
 
 // comand  de base  !!
