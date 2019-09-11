@@ -1,22 +1,40 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
+const Enmap = require('enmap');
 var axios = require('axios');
 var mercadopago = require('mercadopago');
 var colors = require('colors');
-var config = require('./config');
+var config = require('./config.json');
 var oldAccessToken = mercadopago.configurations.getAccessToken();
 bot.commands = new Discord.Collection();
 
-// carregando os comando a ser utilizados
+/*
+Carregar DB
+*/
 
-fs.readdir("./comandos", (err, files) => {
+
+//Carregando Eventos
+fs.readdir("./events/", (err, files) => {
+    if (err) return console.error(err);
+    files.forEach(file => {
+        const event = require(`./events/${file}`);
+        let eventName = file.split(".")[0];
+        client.on(eventName, event.bind(null, client));
+    });
+});
+
+
+
+//Carregando os comandos
+fs.readdir("./comandos/", (err, files) => {
     if(err) console.log(err);
 
     let arquivosjs = files.filter(f => f.slit(".").pop() == "js");
     arquivosjs.forEach((f,i) => {
         let props = require(`./comandos/${f}`);
         console.log(`comandos ${f} carregadores com sucesso.`)
+        //push num BD?
         bot.commands.set(props.help.name.props);
 
     })
