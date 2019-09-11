@@ -11,22 +11,21 @@
     "enmap": "^5.1.2",
     "install-peers": "^1.0.3",
     "mercadopago": "^1.1.0",
-    "nodejs": "0.0.0",
+    "node": "^12.10.0",
+    "nodejs": "^0.0.0",
     "npm-install-peers": "^1.2.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amrm121/dsbt.git"
-  },
+  "repository": "git+https://github.com/amrm121/dsbt.git",
   "keywords": [],
-  "author": "",
+  "author": "am",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/amrm121/dsbt/issues"
   },
-  "homepage": "https://github.com/amrm121/dsbt#readme"
+  "homepage": "https://github.com/amrm121/dsbt#readme",
+  "private": true
 }

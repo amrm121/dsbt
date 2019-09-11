@@ -1,0 +1,14 @@
+{
+  "name": "Joao",
+  "surname": "Silva",
+  "email": "user@email.com",
+  "date_created": "2015-06-02T12:58:41.425-04:00",
+  "phone": {
+    "area_code": "11",
+    "number": "4444-4444"
+  },
+  "identification": {
+    "type": "CPF",
+    "number": "19119119100"
+  }
+}

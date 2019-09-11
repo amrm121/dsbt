@@ -7,6 +7,7 @@ var mercadopago = require('mercadopago');
 var colors = require('colors');
 var config = require('./config.json');
 var oldAccessToken = mercadopago.configurations.getAccessToken();
+client.config = config;
 //bot.commands = new Discord.Collection(); -> Adicionar module.exports bot?
 
 /*
