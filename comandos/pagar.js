@@ -1,23 +1,6 @@
 const request = require('request');
-const axios = require('axios');
+
 const util = require('../util/util.js');
-
-axios.create({
-    BaseURL: " https://api.mercadopago.com/v1/advanced_payments";
-})
-
-
-
-axios({
-  method: 'post',
-  url: '',
-  data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  }
-});
-
-
    /* src="https://www.mercadopago.com.br/integrations/v1/web-tokenize-checkout.js"
     data-public-key="ENV_PUBLIC_KEY"
     data-transaction-amount="100.00"> */
@@ -25,7 +8,6 @@ axios({
 //Os campos obrigatórios para envio são o token, transaction_amount, payment_method_id e o payer.email.
 
 exports.run = async (client, message) => {
-    let url = 
     let data = JSON.parse()
 
 }
