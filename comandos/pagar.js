@@ -1,15 +1,108 @@
 const request = require('request');
-
+const payer = require('../payer.json')
 const util = require('../util/util.js');
+const axios = require('axios');
+var express = require('express');
+var cors = require('cors');
+var config = require('../config.json')
+var mercadopago = require('mercadopago');
+
+var app = express();
+
+var corsOptions = {
+  origin: 'https://api.mercadopago.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+
+
    /* src="https://www.mercadopago.com.br/integrations/v1/web-tokenize-checkout.js"
     data-public-key="ENV_PUBLIC_KEY"
     data-transaction-amount="100.00"> */
 
 //Os campos obrigatórios para envio são o token, transaction_amount, payment_method_id e o payer.email.
 
-exports.run = async (client, message) => {
-    let data = JSON.parse()
+let preference = {
+  items: [
+    {
+      title: 'Exemplo',
+      unit_price: 100,
+      quantity: 1,
+    }
+  ]
+};
+var pid = '';
+mercadopago.preferences.create(preference)
+.then(function(res){
+// Este valor substituirá a string "$$init_point$$" no seu HTML
+    pid = res.body.id;
+    console.log(pid);
+    
+    
+    
+  //console.log(error);
+  //global.init_point = response.body.init_point;
+}).catch(function(error){
+  console.log(error);
+});
 
+var payment = {
+  description: 'Buying a PS4',
+  transaction_amount: 10500,
+  payment_method_id: 'rapipago',
+  payer: {
+    email: 'test_user_3931694@testuser.com',
+    identification: {
+      type: 'DNI',
+      number: '34123123'
+    }
+  }
+};
+
+
+
+/*
+mercadopago.payment.create({
+  description: 'Buying a PS4',
+  transaction_amount: 10500,
+  payment_method_id: 'visa',
+  access_token: 'TEST-5912165670143479-090907-ced34daa9a77ad1c47f02274de5a0d4d-9796544',
+  token : "b3a7dbec3eb0d71798c4f19fec445795",
+  payer: {
+    email: 'test_user_3931694@testuser.com',
+    identification: {
+      type: 'DNI',
+      number: '34123123'
+    }
+  }
+}).then(function (mpResponse) {
+  console.log(mpResponse);
+}).catch(function (mpError) {
+  console.log(mpError);
+});*/
+
+mercadopago.payment.create(payment, {
+  access_token: 'TEST-5912165670143479-090907-ced34daa9a77ad1c47f02274de5a0d4d-979654',
+}).then(function (mpResponse) {
+    console.log(mpResponse);
+});
+
+
+exports.run = async (client, message) => {
+    axios.post('https://api.mercadopago.com/v1/advanced_payments', {
+        url: `/users/${pid}/test_user?access_token=TEST-5912165670143479-090907-ced34daa9a77ad1c47f02274de5a0d4d-9796544`,
+        headers: 'Content-Type: application/json',
+        data: {
+             site_id: 'MLB'
+        }
+    })
+    .then(function(response){
+        message.channel.send(JSON.stringify(response.data));
+    })
+    .catch(function(error){        
+        console.log(error);
+    });
+    //message.channel.send(JSON.stringify(payer));
 }
 
 
@@ -39,14 +132,6 @@ exports.run = async (client, message) => {
         }
     });
 }*/
-
-
-
-
-
-
-
-
 
 function getBin() {
   const cardnumber = document.getElementById("cardnumber");
